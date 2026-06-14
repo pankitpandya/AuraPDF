@@ -229,10 +229,8 @@ class WorkspaceState: ObservableObject {
             img.unlockFocus()
         } else {
             if let pdfPage = page.sourceDocument?.page(at: page.originalPageIndex) {
-                let originalRotation = pdfPage.rotation
-                pdfPage.rotation = (originalRotation + page.rotation) % 360
-                img = pdfPage.thumbnail(of: size, for: .mediaBox)
-                pdfPage.rotation = originalRotation // restore
+                let baseImg = pdfPage.thumbnail(of: size, for: .mediaBox)
+                img = baseImg.rotated(by: CGFloat(-page.rotation))
             } else {
                 img = NSImage()
             }
@@ -266,5 +264,31 @@ class WorkspaceState: ObservableObject {
         }
 
         return outputDoc.write(to: url)
+    }
+}
+
+extension NSImage {
+    func rotated(by degrees: CGFloat) -> NSImage {
+        if degrees == 0 || degrees == 360 || degrees == -360 { return self }
+        
+        let radians = degrees * .pi / 180
+        let transform = CGAffineTransform(rotationAngle: radians)
+        var newSize = CGRect(origin: .zero, size: self.size).applying(transform).size
+        newSize.width = abs(newSize.width)
+        newSize.height = abs(newSize.height)
+        
+        let newImage = NSImage(size: newSize)
+        newImage.lockFocus()
+        
+        let nsTransform = NSAffineTransform()
+        nsTransform.translateX(by: newSize.width / 2, yBy: newSize.height / 2)
+        nsTransform.rotate(byDegrees: degrees)
+        nsTransform.translateX(by: -self.size.width / 2, yBy: -self.size.height / 2)
+        nsTransform.concat()
+        
+        self.draw(at: .zero, from: NSRect(origin: .zero, size: self.size), operation: .copy, fraction: 1.0)
+        
+        newImage.unlockFocus()
+        return newImage
     }
 }
