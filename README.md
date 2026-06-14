@@ -67,16 +67,16 @@ Alternatively, double-click **AuraPDF.app** in Finder inside the project folder.
 
 ## File Structure
 
-- **[App.swift](file:///Users/pandya/Dev Project/PDF Tools/App.swift)**: Application entry point and window scene configuration.
-- **[WorkspaceState.swift](file:///Users/pandya/Dev Project/PDF Tools/WorkspaceState.swift)**: Application state controller carrying PDFKit logic (load, merge, rotate, export).
-- **[ContentView.swift](file:///Users/pandya/Dev Project/PDF Tools/ContentView.swift)**: Main layout containing the sidebar, batch toolbar, grid canvas, and drop zone.
-- **[PageCardView.swift](file:///Users/pandya/Dev Project/PDF Tools/PageCardView.swift)**: Page card grid elements with interactive selection, action menus, and inspection popovers.
-- **[GenerateIcon.swift](file:///Users/pandya/Dev Project/PDF Tools/GenerateIcon.swift)**: Cocoa script that outputs a custom brand logo.
-- **[Info.plist](file:///Users/pandya/Dev Project/PDF Tools/Info.plist)**: App metadata definition.
-- **[build.sh](file:///Users/pandya/Dev Project/PDF Tools/build.sh)**: Compilation orchestration and bundling pipeline.
+- **[App.swift](App.swift)**: Application entry point and window scene configuration.
+- **[WorkspaceState.swift](WorkspaceState.swift)**: Application state controller carrying PDFKit logic (load, merge, rotate, export).
+- **[ContentView.swift](ContentView.swift)**: Main layout containing the sidebar, batch toolbar, grid canvas, and drop zone.
+- **[PageCardView.swift](PageCardView.swift)**: Page card grid elements with interactive selection, action menus, and inspection popovers.
+- **[GenerateIcon.swift](GenerateIcon.swift)**: Cocoa script that outputs a custom brand logo.
+- **[Info.plist](Info.plist)**: App metadata definition.
+- **[build.sh](build.sh)**: Compilation orchestration and bundling pipeline.
 
 ---
 
 ## License
 
-This project is open-source and available under the GNU GPL v3 License (see the [LICENSE](file:///Users/pandya/Dev Project/PDF Tools/LICENSE) file for details).
+This project is open-source and available under the GNU GPL v3 License (see the [LICENSE](LICENSE) file for details).
