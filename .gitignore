@@ -1,0 +1,8 @@
+# OS files
+.DS_Store
+
+# Xcode / Build artifacts
+AuraPDF.app/
+*.o
+*.swiftdoc
+*.swiftmodule
