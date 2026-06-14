@@ -79,4 +79,4 @@ Alternatively, double-click **AuraPDF.app** in Finder inside the project folder.
 
 ## License
 
-This project is open-source and available under the MIT License.
+This project is open-source and available under the GNU GPL v3 License (see the [LICENSE](file:///Users/pandya/Dev Project/PDF Tools/LICENSE) file for details).
