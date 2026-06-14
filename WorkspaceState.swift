@@ -17,6 +17,12 @@ struct WorkspacePage: Identifiable, Equatable {
     let isBlank: Bool
     let pageSize: CGSize // Standard size in points (e.g. Letter or A4)
 
+    var isLandscape: Bool {
+        let isOriginalLandscape = pageSize.width > pageSize.height
+        let isRotated90or270 = (rotation == 90 || rotation == 270)
+        return isOriginalLandscape ? !isRotated90or270 : isRotated90or270
+    }
+
     static func == (lhs: WorkspacePage, rhs: WorkspacePage) -> Bool {
         return lhs.id == rhs.id && lhs.rotation == rhs.rotation
     }

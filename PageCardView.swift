@@ -15,13 +15,17 @@ struct PageCardView: View {
     
     var body: some View {
         VStack(spacing: 6) {
+            let isLandscape = page.isLandscape
+            let currentWidth = isLandscape ? size * 1.35 : size
+            let currentHeight = isLandscape ? size : size * 1.35
+            
             ZStack(alignment: .topTrailing) {
                 // Main Page Thumbnail Image
                 let thumb = state.getThumbnail(for: page, size: CGSize(width: size * 1.5, height: size * 2.0))
                 Image(nsImage: thumb)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: size, height: size * 1.35)
+                    .frame(width: currentWidth, height: currentHeight)
                     .background(Color.white)
                     .cornerRadius(6)
                     .shadow(color: Color.black.opacity(isHovered ? 0.2 : 0.1), radius: isHovered ? 6 : 3, x: 0, y: isHovered ? 3 : 1)
@@ -84,7 +88,7 @@ struct PageCardView: View {
                         }
                         .padding(.bottom, 6)
                     }
-                    .frame(width: size, height: size * 1.35)
+                    .frame(width: currentWidth, height: currentHeight)
                     .background(Color.black.opacity(0.12))
                     .cornerRadius(6)
                 }
@@ -126,9 +130,9 @@ struct PageCardView: View {
                     .font(.system(size: 8))
                     .foregroundColor(.secondary)
                     .lineLimit(1)
-                    .frame(maxWidth: size - 12)
+                    .frame(maxWidth: currentWidth - 12)
             }
-            .frame(width: size)
+            .frame(width: currentWidth)
         }
         .padding(6)
         .background(isHovered ? Color.primary.opacity(0.04) : Color.clear)
