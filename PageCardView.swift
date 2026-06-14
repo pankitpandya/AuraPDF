@@ -89,7 +89,7 @@ struct PageCardView: View {
                     .cornerRadius(6)
                 }
 
-                // Selection circular checkbox overlay (Layered on top of the hover overlay)
+                // Selection circular checkbox overlay (Layered on top of the hover overlay, bounded to avoid blocking lower controls)
                 Button(action: {
                     if isSelected {
                         state.selectedPageIds.remove(page.id)
@@ -107,8 +107,11 @@ struct PageCardView: View {
                                 .foregroundColor(.white)
                         }
                     }
+                    .frame(width: 24, height: 24)
                 }
                 .buttonStyle(PlainButtonStyle())
+                .frame(width: 24, height: 24)
+                .contentShape(Rectangle())
                 .padding(6)
             }
             .onHover { hovering in
