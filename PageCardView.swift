@@ -89,30 +89,27 @@ struct PageCardView: View {
                     .cornerRadius(6)
                 }
 
-                // Selection circular checkbox overlay (Layered on top of the hover overlay, bounded to avoid blocking lower controls)
-                Button(action: {
+                // Selection circular checkbox overlay (Layered on top of the hover overlay, using onTapGesture to prevent hit-test blocking)
+                ZStack {
+                    Circle()
+                        .fill(isSelected ? Color.accentColor : Color.black.opacity(0.4))
+                        .frame(width: 18, height: 18)
+                    if isSelected {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                }
+                .frame(width: 24, height: 24)
+                .contentShape(Rectangle())
+                .padding(6)
+                .onTapGesture {
                     if isSelected {
                         state.selectedPageIds.remove(page.id)
                     } else {
                         state.selectedPageIds.insert(page.id)
                     }
-                }) {
-                    ZStack {
-                        Circle()
-                            .fill(isSelected ? Color.accentColor : Color.black.opacity(0.4))
-                            .frame(width: 18, height: 18)
-                        if isSelected {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 9, weight: .bold))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .frame(width: 24, height: 24)
                 }
-                .buttonStyle(PlainButtonStyle())
-                .frame(width: 24, height: 24)
-                .contentShape(Rectangle())
-                .padding(6)
             }
             .onHover { hovering in
                 isHovered = hovering
