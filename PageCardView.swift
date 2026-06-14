@@ -30,28 +30,6 @@ struct PageCardView: View {
                             .stroke(isSelected ? Color.accentColor : Color.black.opacity(0.15), lineWidth: isSelected ? 3 : 1)
                     )
                 
-                // Selection circular checkbox overlay
-                Button(action: {
-                    if isSelected {
-                        state.selectedPageIds.remove(page.id)
-                    } else {
-                        state.selectedPageIds.insert(page.id)
-                    }
-                }) {
-                    ZStack {
-                        Circle()
-                            .fill(isSelected ? Color.accentColor : Color.black.opacity(0.4))
-                            .frame(width: 18, height: 18)
-                        if isSelected {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 9, weight: .bold))
-                                .foregroundColor(.white)
-                        }
-                    }
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding(6)
-                
                 // Hover Action Overlay
                 if isHovered {
                     VStack {
@@ -110,6 +88,28 @@ struct PageCardView: View {
                     .background(Color.black.opacity(0.12))
                     .cornerRadius(6)
                 }
+
+                // Selection circular checkbox overlay (Layered on top of the hover overlay)
+                Button(action: {
+                    if isSelected {
+                        state.selectedPageIds.remove(page.id)
+                    } else {
+                        state.selectedPageIds.insert(page.id)
+                    }
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(isSelected ? Color.accentColor : Color.black.opacity(0.4))
+                            .frame(width: 18, height: 18)
+                        if isSelected {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 9, weight: .bold))
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(6)
             }
             .onHover { hovering in
                 isHovered = hovering
